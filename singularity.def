@@ -1,0 +1,17 @@
+Bootstrap: docker
+From: maladmin/amico:latest
+
+%setup
+  cp run_amico.py ${SINGULARITY_ROOTFS}/opt/run_amico.py
+  exit 0
+
+%post
+  chmod 755 /opt/run_amico.py
+
+  mkdir /input
+  mkdir /output
+  exit 0
+
+%runscript
+echo "$@"
+/opt/run_amico.py "$@"
