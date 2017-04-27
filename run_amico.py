@@ -43,10 +43,12 @@ def main():
     # start processing here
     amico.core.setup()
     ae = amico.Evaluation(study_folder, subject_folder)
+    delimiter = args.delimiter
+
     if not scheme_file:
-        scheme_file = amico.util.fsl2scheme(bvals_file, bvecs_file, delimiter=',')
+        scheme_file = amico.util.fsl2scheme(bvals_file, bvecs_file, delimiter=delimiter)
     if not os.path.isfile(scheme_file):
-        scheme_file = amico.util.fsl2scheme(bvals_file, bvecs_file, scheme_file, delimiter=',')
+        scheme_file = amico.util.fsl2scheme(bvals_file, bvecs_file, scheme_file, delimiter=delimiter)
 
     ae.load_data(dwi_filename=dwi_file,
                  scheme_filename=scheme_file,
@@ -88,6 +90,8 @@ if __name__ == '__main__':
                         help="Name of the mask file."
                         " Interpreted relative to subject folder",
                         default="dwi_brain_mask.nii.gz")
+    parser.add_argument("--delimiter",
+                        help="Delimiter to be used for bvals and bvecs files")
 
     args = parser.parse_args()
     main()
