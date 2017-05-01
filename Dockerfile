@@ -47,7 +47,7 @@ RUN apt-get update \
 
   # install Amico
   WORKDIR /opt
-  RUN git clone https://github.com/tomwright01/AMICO.git
+  RUN git clone https://github.com/daducci/AMICO.git
   WORKDIR /opt/AMICO
   RUN pip install .
 
